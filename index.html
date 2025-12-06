@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>JavaScript Урок 1</title>
+</head>
+<body>
+    <div class="buttons-block">
+        <button id="say-hello-btn" class="btn">Скажи привет</button>
+        <button id="say-bye-btn" class="btn">Скажи пока</button>
+    </div>
+
+    <div id="hello-block" class="hide-block">
+        <div>Привет</div>
+    </div>
+
+    <div id="bye-block" class="hide-block">
+        <div>Пока</div>
+    </div>
+</body>
+
+<script>
+    const helloBlock = document.getElementById('hello-block');
+    const byeBlock = document.getElementById('bye-block');
+
+    document.getElementById('say-hello-btn').addEventListener('click', ()=>{
+        helloBlock.classList.remove('hide-block');
+        helloBlock.classList.add('show-block');
+    });
+    document.getElementById('say-bye-btn').addEventListener('click', ()=>{
+        byeBlock.classList.remove('hide-block');
+        byeBlock.classList.add('show-block');
+    });
+</script>
+
+</html>
