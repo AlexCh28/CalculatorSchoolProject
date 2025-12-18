@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>JavaScript Урок 2</title>
+    <link rel="stylesheet" href="buttons.css">
+    <link rel="stylesheet" href="input.css">
+    <title>Калькулятор</title>
 </head>
 <body>
-    <div class="buttons-block">
-        <button id="say-hello-btn" class="btn">Скажи привет</button>
-        <button id="say-bye-btn" class="btn">Скажи пока</button>
+    <div class="display-container">
+        <div class="display">
+            <div class="previous-expression" id="previous-expression">
+                <div>1+2</div>
+                <div>3+4</div>
+                <div>4*5</div>
+            </div>
+            <div class="current-input" id="current-input">0</div>
+        </div>
     </div>
-
-    <div id="hello-block" class="hide-block">
-        <div>Привет</div>
-    </div>
-
-    <div id="bye-block" class="hide-block">
-        <div>Пока</div>
+    <div class="calculator">
+        <button class="calc-btn" onclick="appendNumber('1')">1</button>
+        <button class="calc-btn" onclick="appendNumber('2')">2</button>
+        <button class="calc-btn" onclick="appendNumber('3')">3</button>
+        <button class="calc-btn operation" onclick="appendOperation('+')">+</button>
+        <button class="calc-btn" onclick="appendNumber('4')">4</button>
+        <button class="calc-btn" onclick="appendNumber('5')">5</button>
+        <button class="calc-btn" onclick="appendNumber('6')">6</button>
+        <button class="calc-btn operation" onclick="appendOperation('-')">-</button>
+        <button class="calc-btn" onclick="appendNumber('7')">7</button>
+        <button class="calc-btn" onclick="appendNumber('8')">8</button>
+        <button class="calc-btn" onclick="appendNumber('9')">9</button>
+        <button class="calc-btn operation" onclick="appendOperation('*')">*</button>
+        <button class="calc-btn clear" onclick="clearAll()">C</button>
+        <button class="calc-btn" onclick="appendNumber('0')">0</button>
+        <button class="calc-btn equals" onclick="calculate()">=</button>
+        <button class="calc-btn operation" onclick="appendOperation('/')">÷</button>
     </div>
 </body>
 
-<script>
-    const helloBlock = document.getElementById('hello-block');
-    const byeBlock = document.getElementById('bye-block');
-
-    document.getElementById('say-hello-btn').addEventListener('click', ()=>{
-        helloBlock.classList.remove('hide-block');
-        helloBlock.classList.add('show-block');
-    });
-    document.getElementById('say-bye-btn').addEventListener('click', ()=>{
-        byeBlock.classList.remove('hide-block');
-        byeBlock.classList.add('show-block');
-    });
-</script>
+<script src="script.js"></script>
 
 </html>
