@@ -1,13 +1,37 @@
+// let <какое-то название> - создание переменной с каким-то названием
+// переменные в отличие от констант могут менять свое значение в ходе работы кода
+
+// Основные типы данных в JS
+// 1).  number - отвечает за все числа (только они работают с математикой)
+// 2).  string - отвечает за все тексты (строки)
+// 3).  boolean - отвечает за логическую истину или ложь
+// 4).  array - массив - список разных значений - [1,2,3,4,5]
+//      у массивов есть индексы (номера элементов)
+//      индексы в массиве начинаются с нуля
+// 5).  null - пустое значение, которое либо вызывает ошибку в коде, если
+//      мы пытаемся к нему обращаться, либо ни на что не влияет, если мы делаем
+//      с этим значением какие-то математические операции
+// 6).  undefined - неопределенное значение
 let currentInput = '0';
 let previousExpression = '';
 let operation = null;
 let resetScreen = false;
 
-const currentInputElement = document.getElementById('current-input');
+// const <какое-то название> - создание константы с каким-то именем
+// константы это неизменяемое значение
+// document - обращение к HTML-файлу, позволяет обращаться к элементам 
+// getElementById - взять элемент из документа по его ID
+// Как итог, ниже мы создаем константу input, которая хранит ссылку на элемент
+// с ID current-input
+const input = document.getElementById('current-input');
+
+// создаем константу previousExpressionElement, которая хранит ссылку на
+// <div class="previous-expression" id="previous-expression"></div>
+// (строчка 13 из html-документа)
 const previousExpressionElement = document.getElementById('previous-expression');
 
 function updateDisplay() {
-    currentInputElement.textContent = currentInput;
+    input.textContent = currentInput;
     previousExpressionElement.textContent = previousExpression;
 }
 
@@ -101,10 +125,10 @@ function clearEntry() {
 }
 
 function showError(message) {
-    currentInputElement.classList.add('error');
-    currentInputElement.textContent = message;
+    input.classList.add('error');
+    input.textContent = message;
     setTimeout(() => {
-        currentInputElement.classList.remove('error');
+        input.classList.remove('error');
         currentInput = '0';
         updateDisplay();
     }, 1500);
