@@ -30,11 +30,26 @@ const input = document.getElementById('current-input');
 // (строчка 13 из html-документа)
 const previousExpressionElement = document.getElementById('previous-expression');
 
+// Обновляет экран калькулятора
+// Подробно: функция updateDisplay - передает в текстовое поле калькулятора текущее
+// число, которое набирает пользователь и текущий знак действия.
+// Во время запуска стартовое значение 0 и знак действия отсутствует. 
 function updateDisplay() {
     input.textContent = currentInput;
     previousExpressionElement.textContent = previousExpression;
 }
 
+// Добавляет на экран число по нажатию на кнопку
+// Подробнее: Функция appendNumber принимает на вход число. 
+// В нашем случае это параметр number
+// && - логическое И
+// || - логическое ИЛИ
+// Функция добавляет на экран переданное число.
+// Если на экране написано 0 ИЛИ только что
+// был выполнен расчет примера с помощью знака равно, 
+// то текстовое поле полностью заменяется на переданное число.
+// Если на экране не 0, то новое число приписывается справа
+// После этого экран обновляется с помощью функции updateDisplay
 function appendNumber(number) {
     if (currentInput === '0' || resetScreen) {
         currentInput = number;
@@ -43,9 +58,9 @@ function appendNumber(number) {
         currentInput += number;
     }
     updateDisplay();
-    animateButton(event.target);
 }
 
+// Добавляет на экран знак действия по нажатию на кнопку
 function appendOperation(op) {
     if (operation !== null && !resetScreen) {
         calculate();
@@ -54,9 +69,9 @@ function appendOperation(op) {
     previousExpression = `${currentInput} ${op}`;
     resetScreen = true;
     updateDisplay();
-    animateButton(event.target);
 }
 
+// Пишет на экране дробное число, если такое появилось по итогу расчета
 function appendDecimal() {
     if (resetScreen) {
         currentInput = '0.';
@@ -65,9 +80,9 @@ function appendDecimal() {
         currentInput += '.';
     }
     updateDisplay();
-    animateButton(event.target);
 }
 
+// Выполняет расчет примера
 function calculate() {
     let computation;
     const prev = parseFloat(previousExpression.split(' ')[0]);
@@ -107,23 +122,18 @@ function calculate() {
     operation = null;
     resetScreen = true;
     updateDisplay();
-    animateButton(event.target);
 }
 
+
+// Очищает калькулятор от всех чисел и действий
 function clearAll() {
     currentInput = '0';
     previousExpression = '';
     operation = null;
     updateDisplay();
-    animateButton(event.target);
 }
 
-function clearEntry() {
-    currentInput = '0';
-    updateDisplay();
-    animateButton(event.target);
-}
-
+// Показывает ошибку
 function showError(message) {
     input.classList.add('error');
     input.textContent = message;
@@ -134,39 +144,5 @@ function showError(message) {
     }, 1500);
 }
 
-function animateButton(button) {
-    button.classList.add('clicked');
-    setTimeout(() => {
-        button.classList.remove('clicked');
-    }, 200);
-}
-
-// Поддержка клавиатуры
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-
-    if ((key >= '0' && key <= '9') || key === '.') {
-        if (key === '.') {
-            appendDecimal();
-        } else {
-            appendNumber(key);
-        }
-    } else if (['+', '-', '*', '/', '%'].includes(key)) {
-        appendOperation(key);
-    } else if (key === 'Enter' || key === '=') {
-        event.preventDefault();
-        calculate();
-    } else if (key === 'Escape' || key === 'Delete') {
-        clearAll();
-    } else if (key === 'Backspace') {
-        if (currentInput.length > 1) {
-            currentInput = currentInput.slice(0, -1);
-        } else {
-            currentInput = '0';
-        }
-        updateDisplay();
-    }
-});
-
-// Инициализация
+// Отрисовывает стартовые калькулятор
 updateDisplay();
