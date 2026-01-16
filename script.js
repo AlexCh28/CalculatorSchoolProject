@@ -134,6 +134,7 @@ function clearAll() {
 }
 
 // Показывает ошибку
+// Показывается на 1.5 секунды (1500 милисекунд)
 function showError(message) {
     input.classList.add('error');
     input.textContent = message;
